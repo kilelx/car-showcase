@@ -7,24 +7,24 @@ import { Combobox, ComboboxButton, ComboboxInput, ComboboxOption, ComboboxOption
 import { manufacturers } from "@/constants"
 import { CountQueuingStrategy } from "stream/web"
 
-const SearchManufacturer = ({manufacturer, setManufacturer} : searchManufacturerProps) => {
+const SearchManufacturer = ({ manufacturer, setManufacturer }: searchManufacturerProps) => {
 
   const [query, setQuery] = useState('');
 
   // Filter the manufacturers based on the query
   const filteredManufacturers =
-  // If the query equals to an empty string, return all the manufacturers
+    // If the query equals to an empty string, return all the manufacturers
     query === ''
       ? manufacturers
-// If not, return manufacturers where the item includes the query
+      // If not, return manufacturers where the item includes the query
       : manufacturers.filter(item => {
         return (
           item.toLowerCase()
-          // Delete the white spaces
-          .replace(/\s+/g, "")
-          .includes(query.toLowerCase().replace(/\s+/g, "")))
+            // Delete the white spaces
+            .replace(/\s+/g, "")
+            .includes(query.toLowerCase().replace(/\s+/g, "")))
       })
- 
+
   return (
     <div className="search-manufacturer">
       <Combobox>
@@ -48,7 +48,7 @@ const SearchManufacturer = ({manufacturer, setManufacturer} : searchManufacturer
           />
 
           <Transition
-          // Act as a Fragment = don't add element to the DOM
+            // Act as a Fragment = don't add element to the DOM
             as={Fragment}
             leave="transition ease-in duration-100"
             leaveFrom="opacity-100"
@@ -59,28 +59,41 @@ const SearchManufacturer = ({manufacturer, setManufacturer} : searchManufacturer
             {/* Where the 'dropdown' is displayed */}
             <ComboboxOptions>
               {filteredManufacturers.length === 0 && query !== ""
-              // If we can't find a manufacturer
-              ? (
-                <ComboboxOption
-                  value={query}
-                  className="search-manufacturer__option"
-                >
-                  No results.
-                </ComboboxOption>
-              ) : (
-                // If we found something
-                filteredManufacturers.map(item => (
+                // If we can't find a manufacturer
+                ? (
                   <ComboboxOption
-                    key={item}
-                    value={item}
-                    className={({active}) => `relative search-manufacturer__option
-                    ${active ? 'bg-primary-blue text-white' : "text-gray-900"}
-                    `}
+                    value={query}
+                    className="search-manufacturer__option"
                   >
-                    {item}
+                    No results.
                   </ComboboxOption>
-                ))
-              )}
+                ) : (
+                  // If we found something
+                  filteredManufacturers.map(item => (
+                    <ComboboxOption
+                      key={item}
+                      value={item}
+                      className={({ focus }) => `relative search-manufacturer__option
+                    ${focus ? 'bg-primary-blue text-white' : "text-gray-900"}
+                    `}
+                    >
+                      {/* JS block with a destructured function inside */}
+                      {({ selected, focus }) => (
+                        <>
+                          <span className={`block truncate ${selected ? "font-medium" : "font-normal"}`}>
+                            {item}
+                          </span>
+
+                          {/* Show an active blue background color if the option is selected */}
+                          {selected ? (
+                            <span className={`absolute inset-y-0 left-0 flex items-center pl-3 ${focus ? "text-white" : "text-pribg-primary-purple"}`}
+                            ></span>
+                          ) : null}
+                        </>
+                  )}
+                    </ComboboxOption>
+                  ))
+                )}
             </ComboboxOptions>
           </Transition>
         </div>
