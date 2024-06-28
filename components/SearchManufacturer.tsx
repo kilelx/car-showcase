@@ -2,12 +2,11 @@
 
 import { Fragment, useState } from "react"
 import Image from "next/image"
-import { searchManufacturerProps } from "@/types"
+import { SearchManufacturerProps } from "@/types"
 import { Combobox, ComboboxButton, ComboboxInput, ComboboxOption, ComboboxOptions, Transition } from "@headlessui/react"
 import { manufacturers } from "@/constants"
-import { CountQueuingStrategy } from "stream/web"
 
-const SearchManufacturer = ({ manufacturer, setManufacturer }: searchManufacturerProps) => {
+const SearchManufacturer = ({ manufacturer, setManufacturer }: SearchManufacturerProps) => {
 
   const [query, setQuery] = useState('');
 
@@ -27,7 +26,11 @@ const SearchManufacturer = ({ manufacturer, setManufacturer }: searchManufacture
 
   return (
     <div className="search-manufacturer">
-      <Combobox>
+      <Combobox
+      // We update the state when the combobox value changes
+        value={manufacturer}
+        onChange={setManufacturer}
+      >
         <div className="relative w-full">
           <ComboboxButton className='absolute top-[14px]'>
             <Image
