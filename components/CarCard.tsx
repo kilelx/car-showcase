@@ -1,14 +1,16 @@
 "use client"
 
 import { useState } from "react";
-import { CarProps } from "@/types"
 import Image from "next/image";
+
+import { CarProps } from "@/types"
+import CustomButton from "./CustomButton";
 
 interface CarCardProps {
     car: CarProps
 }
 
-const CarCard = ({car} : 
+const CarCard = ({car} :
     CarCardProps
 ) => {
 

@@ -8,7 +8,6 @@ export default async function Home() {
   const isDataEmpty = !Array.isArray(allCars) || allCars.length < 1 || !allCars;
 
   // console.log(allCars);
-  
 
   return (
     <main
@@ -40,7 +39,7 @@ export default async function Home() {
         ) : (
           <div className="home-error__container">
             <h2 className="text-black text-xl font-bold">Oops, no result...</h2>
-            <p>{allCars?.error}</p> 
+            <p>{allCars?.error}</p>
           </div>
         )}
 
