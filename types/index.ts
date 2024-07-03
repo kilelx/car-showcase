@@ -33,3 +33,7 @@ export interface CarProps {
     transmission:string;
     year:number;
 }
+
+export interface carDetailsProps {
+    
+}
