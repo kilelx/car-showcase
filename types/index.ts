@@ -2,18 +2,21 @@ import { MouseEventHandler } from "react";
 
 // An interface specifies how a specific structure should look like
 export interface CustomButtonProps {
-    title: string,
+    title: string;
     // It's optionnal
-    containerStyles?: string,
+    containerStyles?: string;
     // A mouse event on a HTML button
-    handleClick?: MouseEventHandler<HTMLButtonElement>,
-    btnType?: "button" | "submit"
+    handleClick?: MouseEventHandler<HTMLButtonElement>;
+    btnType?: "button" | "submit";
+    textStyles?: string;
+    rightIcon?: string;
+    isDisabled?: boolean;
 }
 
 export interface SearchManufacturerProps {
-    manufacturer: string,
+    manufacturer: string;
     // Setter state: a function that takes a strign, and returns nothing
-    setManufacturer: (manufacturer: string) => void
+    setManufacturer: (manufacturer: string) => void;
 }
 
 export interface CarProps {
