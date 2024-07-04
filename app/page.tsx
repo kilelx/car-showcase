@@ -1,9 +1,17 @@
 import { Hero, SearchBar, CustomFilter, CarCard } from "@/components";
 import { fetchCars } from "@/utils";
 
-export default async function Home() {
+// Get all the params from the URL directly
+export default async function Home({ searchParams }) {
 
-  const allCars = await fetchCars();
+  const allCars = await fetchCars({
+    // Get the value from params, or a default one
+    manufacturer: searchParams.manufacturer || '',
+    model: searchParams.model || '',
+    year: searchParams.year || 2022,
+    fuel: searchParams.fuel || '',
+    limit: searchParams.limit || 10,
+  });
 
   const isDataEmpty = !Array.isArray(allCars) || allCars.length < 1 || !allCars;
 
