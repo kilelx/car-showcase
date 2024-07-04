@@ -6,7 +6,7 @@ import CustomButton from "./CustomButton"
 const Hero = () => {
 
   const handleScroll = () => {
-    console.log('click');
+    // console.log('click');
 
   }
 
