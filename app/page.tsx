@@ -1,4 +1,5 @@
 import { Hero, SearchBar, CustomFilter, CarCard } from "@/components";
+import { fuels, yearsOfProduction } from "@/constants";
 import { fetchCars } from "@/utils";
 
 // Get all the params from the URL directly
@@ -31,8 +32,14 @@ export default async function Home({ searchParams }) {
         <div className="home__filters">
           <SearchBar />
           <div className="home__filter-container">
-            <CustomFilter title="fuel" />
-            <CustomFilter title="year" />
+            <CustomFilter
+              title="fuel"
+              options={fuels}
+            />
+            <CustomFilter
+              title="year"
+              options={yearsOfProduction}
+            />
           </div>
         </div>
 
