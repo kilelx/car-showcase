@@ -37,9 +37,13 @@ const CustomFilter = ({title, options}: CustomFilterProps) => {
           >
             <ListboxOptions className="custom-filter__options">
               {options.map((option) => (
-                <ListboxOption>
+                <ListboxOption
+                  key={option.title}
+                  value={option}
+                  className={({active}) => `relative cursor-default select-nonepy-4 px-2 ${active ? 'bg-primary-blue text-white' : 'text-gray-900'}`}
+                >
                   {({selected}) => (
-                     <span>
+                     <span className={`block truncate ${selected ? 'font-medium' : 'font-normal'}`}>
                       {option.title}
                      </span>
                   )}
