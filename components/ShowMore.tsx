@@ -23,6 +23,7 @@ const ShowMore = ({pageNumber, isNext}: ShowMoreProps) => {
   return (
     <div className="w-full flex-center gap-5 mt-10">
         {
+            // If we have more car to show
             !isNext && (
                 <CustomButton
                     title="Show More"
