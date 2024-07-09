@@ -5,6 +5,7 @@ import Image from "next/image"
 import { useRouter } from "next/navigation"
 import { Listbox, ListboxButton, ListboxOption, ListboxOptions, Transition } from "@headlessui/react"
 import { CustomFilterProps } from "@/types"
+import { updateSearchParams } from "@/utils"
 
 const CustomFilter = ({title, options}: CustomFilterProps) => {
 
@@ -13,19 +14,13 @@ const CustomFilter = ({title, options}: CustomFilterProps) => {
   // Select the first option by default, an empty value
   const [selected, setSelected] = useState(options[0])
 
-  const handleUpdateParams = (e: {title: string, value: string}) => {
-    // Updating the URL parameters
-
-    // Save the current search params
-    const searchParams = new URLSearchParams(window.location.search)
-
-    searchParams.set(title, e.value.toLowerCase())
-
-    const newPathname = `${window.location.pathname}?${searchParams.toString()}`;
-
-    // Trigger SSR
-    router.push(newPathname, {scroll: false})
-  }
+    // update the URL search parameters and navigate to the new URL
+    const handleUpdateParams = (e: { title: string; value: string }) => {
+      const newPathName = updateSearchParams(title, e.value.toLowerCase());
+  
+      // Trigger SSR
+      router.push(newPathName, {scroll: false});
+    };
 
   return (
     <div className="w-fit">
