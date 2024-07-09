@@ -8,15 +8,34 @@ import { CustomFilterProps } from "@/types"
 
 const CustomFilter = ({title, options}: CustomFilterProps) => {
 
+  const router = useRouter();
+
   // Select the first option by default, an empty value
   const [selected, setSelected] = useState(options[0])
+
+  const handleUpdateParams = (e: {title: string, value: string}) => {
+    // Updating the URL parameters
+
+    // Save the current search params
+    const searchParams = new URLSearchParams(window.location.search)
+
+    searchParams.set(title, e.value.toLowerCase())
+
+    const newPathname = `${window.location.pathname}?${searchParams.toString()}`;
+
+    // Trigger SSR
+    router.push(newPathname, {scroll: false})
+  }
 
   return (
     <div className="w-fit">
       <Listbox
       // Check headlessui documentation
         value={selected}
-        onChange={e => setSelected(e)}
+        onChange={e => {
+          setSelected(e);
+          handleUpdateParams(e)
+        }}
       >
         <div className="relative w-fit z-10">
           <ListboxButton className="custom-filter__btn" >
